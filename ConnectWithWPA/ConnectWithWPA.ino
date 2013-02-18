@@ -1,4 +1,4 @@
-/*
+f/*
  
  This example connects to an unencrypted Wifi network. 
  Then it prints the  MAC address of the Wifi shield,
