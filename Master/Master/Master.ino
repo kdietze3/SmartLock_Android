@@ -28,16 +28,38 @@
 #include <SPI.h>
 #include <WiFi.h>
 
+#define SPKR 5 //Digital pin for the PCS Speaker
+
 char ssid[] = "Smart";      //  your network SSID (name) 
-char pass[] = "password";   // your network password
+char pass[] = "oxford2012";   // your network password
 int keyIndex = 0;                 // your network key Index number (needed only for WEP)
+boolean reading = false;
+String command = "";
 
 int status = WL_IDLE_STATUS;
 WiFiServer server(80);
 
+void beep(unsigned char delayms){
+  analogWrite(SPKR, 20);      // Almost any value can be used except 0 and 255
+                           // experiment to get the best tone
+  delay(delayms);          // wait for a delayms ms
+  analogWrite(SPKR, 0);       // 0 turns it off
+  delay(delayms);          // wait for a delayms ms   
+}
+
+void beepMultiple(unsigned int numTimes, unsigned char delayms){
+ for (int i = 0; i < numTimes; i++){
+   beep(delayms); 
+ }
+ 
+ 
+  
+}
+
 void setup() {
   Serial.begin(9600);      // initialize serial communication
   pinMode(9, OUTPUT);      // set the LED pin mode
+  pinMode(SPKR, OUTPUT);
 
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
@@ -52,68 +74,85 @@ void setup() {
 
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:    
     status = WiFi.begin(ssid, pass);
-    // wait 10 seconds for connection:
-    delay(10000);
+    // wait 4 seconds for connection:
+    
+    delay(4000);
   } 
   server.begin();                           // start the web server on port 80
   printWifiStatus();                        // you're connected now, so print out the status
+  beepMultiple(3,50);
 }
 
 
 void loop() {
+  wifiFullLineCommands();
+}
+
+
+void wifiFullLineCommands(){
   WiFiClient client = server.available();   // listen for incoming clients
+  if (client) {
 
-  if (client) {                             // if you get a client,
-    Serial.println("new client");           // print a message out the serial port
-    String currentLine = "";                // make a String to hold incoming data from the client
-    while (client.connected()) {            // loop while the client's connected
-      if (client.available()) {             // if there's bytes to read from the client,
-        char c = client.read();             // read a byte, then
-        Serial.write(c);                    // print it out the serial monitor
-        if (c == '\n') {                    // if the byte is a newline character
+    // an http request ends with a blank line
+    boolean currentLineIsBlank = true;
+    boolean sentHeader = false;
+    beepMultiple(5,100);
+    
+    while (client.connected()) {
+      if (client.available()) {
 
-          // if the current line is blank, you got two newline characters in a row.
-          // that's the end of the client HTTP request, so send a response:
-          if (currentLine.length() == 0) {  
-            // HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)
-            // and a content-type so the client knows what's coming, then a blank line:    
-            client.println("HTTP/1.1 200 OK");
-            client.println("Content-type:text/html");
-            client.println();
+        if(!sentHeader){
+          // send a standard http response header
+          client.println("HTTP/1.1 200 OK");
+          client.println("Content-Type: text/html");
+          client.println();
+          sentHeader = true;
+        }
 
-            // the content of the HTTP response follows the header:
-            client.print("<a href=\"/H\">Lock</a> The Door<br>");
-            client.print("<a href=\"/L\">Unlock</a> The Door<br>");
+        char c = client.read();
 
-            // The HTTP response ends with another blank line:
-            client.println();
-            // break out of the while loop:
-            break;         
-          } 
-          else {      // if you got a newline, then clear currentLine:
-            currentLine = "";
+        if(reading && c == ' ') reading = false;
+        if(c == '?') reading = true; //found the ?, begin reading the info
+
+        if(reading){
+          Serial.print(c);
+          if(c != '?'){
+           command += c;
           }
-        }     
-        else if (c != '\r') {    // if you got anything else but a carriage return character,
-          currentLine += c;      // add it to the end of the currentLine
+           
+
         }
 
-        // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
-          //Insert Lock and Unlock Code Here
-          digitalWrite(9, HIGH);               // GET /H turns the LED on
+        if (c == '\n' && currentLineIsBlank)  break;
+
+        if (c == '\n') {
+          currentLineIsBlank = true;
+        }else if (c != '\r') {
+          currentLineIsBlank = false;
         }
-        if (currentLine.endsWith("GET /L")) {
-          //Insert Lock and Unlock Code Here
-          digitalWrite(9, LOW);                // GET /L turns the LED off
-        }
+
       }
     }
-    // close the connection:
-    client.stop();
-    Serial.println("client disonnected");
-  }
+    client.println(command);
+    delay(1); // give the web browser time to receive the data
+    client.stop(); // close the connection:
+
+  } 
+  
 }
+
+void triggerPin(int pin, WiFiClient client){
+//blink a pin - Client needed just for HTML output purposes.  
+  client.print("Turning on pin ");
+  client.println(pin);
+  client.print("<br>");
+
+  digitalWrite(pin, HIGH);
+  delay(25);
+  digitalWrite(pin, LOW);
+  delay(25);
+}
+
 
 void printWifiStatus() {
   // print the SSID of the network you're attached to:
