@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	              android:orientation="vertical"
+	              android:layout_width="fill_parent"
+	              android:layout_height="wrap_content">
+
+		<TextView
+		    android:id="@+id/textView1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/wifi_string" />
+
+	    <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@string/ipaddress" >
+
+            <requestFocus />
+        </EditText>
+
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+
+	        <Button
+	            android:id="@+id/button_open"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/open_button" />
+
+	        <Button
+	            android:id="@+id/button_lock"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/lock_button" />
+
+	    </LinearLayout>
+
+	    <TextView
+	        android:id="@+id/bluetooth_heading"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="@string/bluetooth_string" />
+	    
+		<TextView android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Configuration"/>
+
+		<Button android:layout_height="wrap_content"
+		        android:layout_width="wrap_content"
+		        android:text="Bluetooth Settings"
+		        android:onClick="onBluetoothSettings"/>
+
+		<TextView android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Paired device(s)"/>
+
+		<Spinner android:id="@+id/ID_PAIRED_DEVICES"
+		         android:layout_width="fill_parent"
+		         android:layout_height="wrap_content"/>
+
+		<TextView android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Link"/>
+
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		              android:orientation="horizontal"
+		              android:layout_width="fill_parent"
+		              android:layout_height="fill_parent">
+
+			<Button android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:text="Connect"
+			        android:onClick="onConnectLink"/>
+
+			<Button android:layout_height="wrap_content"
+			        android:layout_width="wrap_content"
+			        android:text="Disconnect"
+			        android:onClick="onDisconnectLink"/>
+
+		</LinearLayout>
+
+		<TextView android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Control(s)"/>
+
+		<LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+
+			<Button
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:onClick="onBluetoothOpen"
+			    android:text="@string/open_button" />
+
+			<Button
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:onClick="onBluetoothLock"
+			    android:text="@string/lock_button" />
+
+		</LinearLayout>
+
+		<TextView android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Status"/>
+
+		<TextView android:id="@+id/ID_STATUS"
+		          android:layout_width="fill_parent"
+		          android:layout_height="wrap_content"
+		          android:text="Waiting for sync"/>
+
+	</LinearLayout>
+</ScrollView>

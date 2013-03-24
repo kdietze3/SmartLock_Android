@@ -3,11 +3,12 @@
     android:versionCode="1"
     android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="15"/>
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="false"
@@ -25,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name="SmartLockController"></activity>
+        <activity android:name="Register"></activity>
     </application>
 
 </manifest>

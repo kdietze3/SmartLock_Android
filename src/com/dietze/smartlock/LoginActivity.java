@@ -117,6 +117,19 @@ public class LoginActivity extends Activity {
 					}
 				});
 		
+		findViewById(R.id.register_button).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Log.d("Parse App","Going to Register Activity");
+						
+						Intent myIntent = new Intent(view.getContext(), Register.class);
+			            startActivityForResult(myIntent, 0);
+						
+						
+					}
+				});
+		
 		
 	}
 
