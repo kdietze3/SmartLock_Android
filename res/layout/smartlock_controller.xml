@@ -7,13 +7,14 @@
     <!-- Login form -->
 
     <LinearLayout
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical" >
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/ipaddress_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

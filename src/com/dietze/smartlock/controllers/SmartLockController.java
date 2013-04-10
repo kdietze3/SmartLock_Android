@@ -1,10 +1,9 @@
-package com.dietze.smartlock;
+package com.dietze.smartlock.controllers;
 
 
 import java.util.ArrayList;
 import java.util.Set;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -13,10 +12,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -25,7 +24,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class SmartLockController extends Activity implements Runnable, Handler.Callback, OnItemSelectedListener{
+import com.dietze.smartlock.R;
+import com.dietze.smartlock.protocols.BlueSmirfSPP;
+import com.dietze.smartlock.utilities.ITitleable;
+import com.dietze.smartlock.utilities.MenuFragment;
+import com.dietze.smartlock.utilities.RequestTask;
+import com.dietze.smartlock.utilities.Transitions;
+import com.slidingmenu.lib.SlidingMenu;
+import com.slidingmenu.lib.app.SlidingFragmentActivity;
+
+public class SmartLockController extends SlidingFragmentActivity implements Runnable, Handler.Callback, OnItemSelectedListener{
 	
 	String ipaddress = "10.10.1.100";
 	Context context;
@@ -46,6 +54,8 @@ public class SmartLockController extends Activity implements Runnable, Handler.C
 	private int mStateLED;
 	private int mStatePOT;
 	private int LEDStatus;
+	
+	private Fragment menu;
 
 	public SmartLockController()
 	{
@@ -65,8 +75,26 @@ public class SmartLockController extends Activity implements Runnable, Handler.C
 		
 		// initialize UI
 		setContentView(R.layout.main);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
+		//set the layout for the menu
+        setBehindContentView(R.layout.menu_frame);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+        
+        //add the menu
+        menu = new MenuFragment();
+        getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.menu_frame, menu)
+            .commit();
+		
+        
+       
+        	enableSlidingMenu();
+        
+        
+        // setup the sliding bar
+        getSlidingMenu().setBehindOffsetRes(R.dimen.show_content);
+        
 		mTextViewStatus         = (TextView) findViewById(R.id.ID_STATUS);
 		ArrayList<String> items = new ArrayList<String>();
 		mSpinnerDevices         = (Spinner) findViewById(R.id.ID_PAIRED_DEVICES);
@@ -87,7 +115,31 @@ public class SmartLockController extends Activity implements Runnable, Handler.C
 		Log.d("SmartLock Controller", "OnCreate finished");
 		
 		
+		
 	}
+	
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+        // home references the app icon
+        if (item.getItemId() == android.R.id.home) {
+            toggle(); // toggles the state of the sliding menu
+            if(getSlidingMenu().isMenuShowing() && menu.isAdded()){
+                setTitle(((ITitleable)menu).getTitle());
+            }
+            return true;
+        }
+        return false;
+    }
+	
+	public void showContent(){
+        getSlidingMenu().showContent();
+    }
+    
+    public void enableSlidingMenu(){
+     // enables the icon to act as the up
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+        
+    }
 
 	@Override
 	protected void onResume()

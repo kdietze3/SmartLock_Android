@@ -1,14 +1,37 @@
 <resources>
 
+    <!--  App Strings -->
     <string name="app_name">Smart Lock</string>
+    
+    <!--  Wifi Strings -->
     <string name="lock_button">Lock</string>
     <string name="open_button">Open</string>
     <string name="ipaddress">10.10.1.100</string>
     <string name="wifi_string">Wifi Control</string>
+    
+    <!-- Bluetooth Strings -->
     <string name="bluetooth_string">Bluetooth Control</string>
+    <string name="connect_string">Connect</string>
+    <string name="disconnect_string">Disconnect</string>
+    <string name="waiting_status">Waiting for Sync</string>
+    <string name="status">Status</string>
+    
+    <!-- Camera Strings -->
+    <string name="snapshot_btn">Save New Snapshot</string>
+    
+    <!-- Login Strings -->
     <string name="email">Enter Email</string>
     <string name="password">Enter Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
-
+    
+    <!-- Menu Strings -->
+    <string name="communication_label">Communication Methods</string>
+    <string name="accessory_label">Accessories</string>
+    <string name="camera">Camera</string>
+	<string name="bluetooth">Bluetooth</string>
+	<string name="wifi">WiFi</string>
+	<string name="autoupdate_btn">Auto Update</string>
+   
+	
 </resources>

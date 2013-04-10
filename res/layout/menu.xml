@@ -1,0 +1,102 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_gray"  >
+
+   
+    <RelativeLayout
+        android:id="@+id/music_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp" >
+
+
+        <TextView 
+            android:id="@+id/communication_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/communication_label"
+            android:textColor="@color/light_gray"/>
+        
+        <View
+            android:id="@+id/communication_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:layout_marginTop="3sp"
+            android:layout_marginBottom="3sp"
+            android:layout_below="@+id/communication_label"
+            android:background="@color/light_gray" />
+        
+        <Button 
+            android:id="@+id/wifi_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/communication_line"
+            android:layout_marginLeft="20sp"
+            android:text="@string/wifi"
+            android:textColor="@color/white"
+            android:textSize="18sp" 
+            android:clickable="true"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/wifi"
+            android:drawablePadding="20sp"/>
+            
+        
+        <Button 
+            android:id="@+id/bluetooth_btn"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wifi_btn"
+            android:layout_marginLeft="20sp"
+            android:text="@string/bluetooth"
+            android:textColor="@color/white"
+            android:textSize="18sp" 
+            android:clickable="true"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/bluetooth"
+            android:drawablePadding="20sp"
+            
+            />
+        
+        <TextView 
+            android:id="@+id/accessory_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/accessory_label"
+            android:textColor="@color/light_gray"
+            android:layout_below="@+id/bluetooth_btn"
+            />
+        
+        <View
+            android:id="@+id/accessories_line"
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:layout_marginTop="3sp"
+            android:layout_marginBottom="3sp"
+            android:layout_below="@+id/accessory_label"
+            android:background="@color/light_gray" />
+        
+        <Button 
+            android:id="@+id/camera_btn"
+            android:layout_width= "wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/accessories_line"
+            android:layout_marginLeft="20sp"
+            android:text="@string/camera"
+            android:textColor="@color/white"
+            android:textSize="18sp" 
+            android:clickable="true"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/camera"
+            android:drawablePadding="20sp"
+            
+            />
+    
+    
+
+    
+    
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.dietze.smartlock;
+package com.dietze.smartlock.login;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -18,6 +18,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dietze.smartlock.R;
+import com.dietze.smartlock.controllers.SmartLockController;
+import com.dietze.smartlock.core.CoreActivity;
+import com.dietze.smartlock.utilities.Register;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
@@ -108,7 +112,7 @@ public class LoginActivity extends Activity {
 						int errorCode = attemptLogin();
 						Log.d("Parse App",Integer.toString(errorCode));
 						if(errorCode >= 0){
-							Intent myIntent = new Intent(view.getContext(), SmartLockController.class);
+							Intent myIntent = new Intent(view.getContext(), CoreActivity.class);
 			                startActivityForResult(myIntent, 0);
 						}
 						else {

@@ -1,4 +1,4 @@
-package com.dietze.smartlock;
+package com.dietze.smartlock.utilities;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -14,7 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.dietze.smartlock.LoginActivity.UserLoginTask;
+import com.dietze.smartlock.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

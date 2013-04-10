@@ -21,7 +21,7 @@
  *
  */
 
-package com.dietze.smartlock;
+package com.dietze.smartlock.protocols;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -13,26 +13,32 @@
         -->
         
         
-        
+        <!--<item name="android:background">@style/ApplicationBackground</item>-->
     </style>
     
    <!-- <style name="ApplicationBackground">     
         <item name="android:background">@color/background</item>
     </style>
     -->
+    
  
-    <style name="WindowTitleBackground">     
+ 
+    <style name="ThemeSelector" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+ 
+    <style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">     
         <item name="android:background">@color/white</item>
     </style>
  
+ 
+    
 
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
-        <!--<item name="android:background">@style/ApplicationBackground</item>-->
-        
+        <item name="android:windowTitleBackgroundStyle">@style/ActionBar</item>
     </style>
 
     <style name="LoginFormContainer">

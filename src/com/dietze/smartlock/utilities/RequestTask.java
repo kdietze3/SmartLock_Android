@@ -1,4 +1,4 @@
-package com.dietze.smartlock;
+package com.dietze.smartlock.utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -10,6 +10,8 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.dietze.smartlock.controllers.SmartLockController;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -24,7 +26,7 @@ import android.widget.Toast;
  * Includes minor error handling.
  * 
  */
-class RequestTask extends AsyncTask<String, String, String>{
+public class RequestTask extends AsyncTask<String, String, String>{
 	
 	Context context = null;
 	int duration = Toast.LENGTH_SHORT;
